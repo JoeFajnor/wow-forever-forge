@@ -16,7 +16,7 @@ import { KNOWN_MAPS } from '../src/explorer/maps';
 import { parsePlacements } from '../src/explorer/objects';
 import { NodeSource } from './nodeSource';
 
-const [wowDir = '/Volumes/SANDISK SSD/World of Warcraft', product = 'wow_classic_beta'] = process.argv.slice(2);
+const [wowDir = '/Volumes/SANDISK SSD/World of Warcraft', product = 'wowf'] = process.argv.slice(2);
 
 /** Every DB2 table the spec relies on (7.1.1), by name and file ID. */
 const TABLES: Record<string, number> = {

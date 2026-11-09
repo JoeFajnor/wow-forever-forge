@@ -10,7 +10,7 @@ Scenes start blank or as a copy of an area of Azeroth, are kept in your browser,
 
 ## What you need
 
-- **World of Warcraft Classic** installed (the folder that contains `_classic_` or `_classic_beta_`).
+- **World of Warcraft Forever** (or Classic) installed (the folder that contains `_forever_` or `_classic_`).
 - **Chrome** or another Chromium-based browser.
 
 ## Windows
@@ -19,7 +19,7 @@ Scenes start blank or as a copy of an area of Azeroth, are kept in your browser,
 2. Run **ForeverForge.exe**. If Windows says *"Windows protected your PC"* (the program isn't
    signed), click **More info**, then **Run anyway**.
 3. It finds World of Warcraft by itself. If not, click **Choose folder** and pick the folder that
-   contains `_classic_` or `_classic_beta_`. The files never leave your computer.
+   contains `_forever_` or `_classic_`. The files never leave your computer.
 
 ## Linux and macOS
 
@@ -34,7 +34,7 @@ bun run dev
 
 Then open **http://localhost:5173**. The dev server looks for the game in the usual places
 (Wine, Lutris, Bottles, Steam, Heroic on Linux; `/Applications` on macOS). If it can't find it,
-set `WOW_DIR` to the folder that contains `_classic_` or `_classic_beta_`, or choose the folder
+set `WOW_DIR` to the folder that contains `_forever_` or `_classic_`, or choose the folder
 in the page:
 
 ```sh

@@ -140,7 +140,7 @@ class ArchiveReader {
 	}
 }
 
-/** Read-only view of a local CASC storage for one product (e.g. wow_classic_beta). */
+/** Read-only view of a local CASC storage for one product (e.g. wowf). */
 export class CascStorage {
 	private constructor(
 		private readonly archives: ArchiveReader,

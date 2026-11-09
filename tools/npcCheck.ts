@@ -15,7 +15,7 @@ import {
 } from '../src/explorer/npcTables';
 import { NodeSource } from './nodeSource';
 
-const [wowDir = '/Volumes/SANDISK SSD/World of Warcraft', product = 'wow_classic_beta'] = process.argv.slice(2);
+const [wowDir = '/Volumes/SANDISK SSD/World of Warcraft', product = 'wowf'] = process.argv.slice(2);
 
 const results: { check: string; ok: boolean; detail: string }[] = [];
 async function check(name: string, fn: () => Promise<string>): Promise<void> {

@@ -4,7 +4,7 @@ import type { SourceInit } from '../worker/protocol';
 import type { ProductInfo } from '../casc/config';
 import { perf } from './perf';
 import { isTyping } from './typing';
-import { knownFolders, productName, productRank, REFERENCE_PRODUCT } from './clientConfig';
+import { currentProduct, knownFolders, productName, productRank, REFERENCE_PRODUCT } from './clientConfig';
 import { showScenes } from '../editor/scenesUi';
 import { folderWasLinked, rememberFolderLinked, showFolderLost, wireLanding } from '../editor/landing';
 import type { StorageStats } from '../casc/storage';
@@ -142,7 +142,9 @@ async function useSource(init: SourceInit): Promise<void> {
 		installed.sort((a, b) => productRank(a.product) - productRank(b.product));
 		const select = $<HTMLSelectElement>('product');
 		select.replaceChildren(...products.map((p) => new Option(`${productName(p.product)} ${p.version}`, p.product)));
-		const saved = savedProduct();
+		const remembered = savedProduct();
+		// A choice of the Forever beta moves to the released Forever once that's installed.
+		const saved = remembered && currentProduct(remembered, products.map((p) => p.product));
 		// The version chosen before, if it's still installed. Otherwise the reference client, or
 		// another classic build as best-effort: the continent file IDs are the classic ones.
 		const preferred = products.find((p) => p.product === saved) ?? products.find((p) => p.product === REFERENCE_PRODUCT) ?? products.find((p) => p.product.startsWith('wow_classic'));
