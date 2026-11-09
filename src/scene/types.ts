@@ -27,7 +27,7 @@ export interface Scene {
 	created: string;
 	modified: string;
 	client: {
-		/** e.g. "wow_classic_beta" (Forever beta). */
+		/** e.g. "wowf" (Forever), or "wow_classic_beta" in scenes made on its beta. */
 		product: string;
 		/** Build name from the build config. */
 		build: string;

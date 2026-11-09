@@ -4,7 +4,7 @@
  * here without other changes.
  */
 export interface ClientProduct {
-	/** The product code in .build.info, e.g. "wow_classic_beta". */
+	/** The product code in .build.info, e.g. "wowf". */
 	product: string;
 	/** What the version is called in menus. */
 	name: string;
@@ -12,16 +12,19 @@ export interface ClientProduct {
 	folder?: string;
 	/** The reference client the builder is built and tested against (§7.1.1); others are best-effort. */
 	reference?: boolean;
+	/** The product that took this one's place: a choice remembered for this one moves to it when it's installed. */
+	replacedBy?: string;
 }
 
 /**
  * Known versions, the preferred ones first: the order ranks the Game version menu and which
- * version opens by default. Forever is the reference client; it is in beta at the time of
- * writing (product wow_classic_beta, folder _classic_beta_), with the launch product code and
- * folder name still to confirm (spec Q10).
+ * version opens by default. Forever is the reference client: released as product wowf in folder
+ * _forever_ (spec Q10, build 1.60.1.70862 on 2026-11-09). Its beta (wow_classic_beta,
+ * _classic_beta_) has the same table layouts and stays readable where it's still installed.
  */
 export const CLIENT_PRODUCTS: ClientProduct[] = [
-	{ product: 'wow_classic_beta', name: 'Forever', folder: '_classic_beta_', reference: true },
+	{ product: 'wowf', name: 'Forever', folder: '_forever_', reference: true },
+	{ product: 'wow_classic_beta', name: 'Forever Beta', folder: '_classic_beta_', replacedBy: 'wowf' },
 	{ product: 'wow_classic_era', name: 'Classic', folder: '_classic_era_' },
 	{ product: 'wow', name: 'Retail', folder: '_retail_' },
 	{ product: 'wow_classic', name: 'MoP Classic', folder: '_classic_' },
@@ -42,6 +45,12 @@ export function productName(product: string): string {
 export function productRank(product: string): number {
 	const i = CLIENT_PRODUCTS.findIndex((p) => p.product === product);
 	return i < 0 ? CLIENT_PRODUCTS.length : i;
+}
+
+/** The product a remembered choice stands for: its replacement when that's installed, else itself. */
+export function currentProduct(product: string, installed: string[]): string {
+	const next = CLIENT_PRODUCTS.find((p) => p.product === product)?.replacedBy;
+	return next && installed.includes(next) ? currentProduct(next, installed) : product;
 }
 
 /** The reference client's product code: the version the builder opens by default. */

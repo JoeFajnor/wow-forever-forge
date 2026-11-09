@@ -8,15 +8,19 @@ Forever client before Phase 2 starts. `bun run compat -- [wowDir] [product]` run
 
 | | |
 |---|---|
-| Product | `wow_classic_beta` (Forever beta) |
-| Version | 1.60.1.70532 (`WOW-70532patch1.60.1_Beta`); first checked on 70450 (2026-10-20) |
-| Date | 2026-10-25 |
-| Result | **40/40 checks pass** (on both builds) |
+| Product | `wowf` (Forever, released; folder `_forever_`) |
+| Version | 1.60.1.70862 (`WOW-70862patch1.60.1_Retail`) |
+| Date | 2026-11-09 |
+| Result | **40/40 checks pass**; `bun run npccheck` 11/11 |
+
+The beta (`wow_classic_beta`, folder `_classic_beta_`) passed 40/40 on 70450 (2026-10-20) and
+70532 (2026-10-25). Every DB2 layout hash the release uses matches 70532's, so the code's field
+numbering carries over unchanged; only row counts moved (a few added lights, displays and items).
 
 ## What was verified
 
-- **CASC storage** opens the install: 2,472,017 index entries, 20,647 encoding pages,
-  1,244,512 root files.
+- **CASC storage** opens the install: 11,132,550 index entries, 20,649 encoding pages,
+  1,244,713 root files (70862).
 - **Every DB2 table the spec relies on** parses as WDC5 with its **native layout** — the field
   numbering the code uses is Forever's own, so no field map is needed (db2Layouts.ts maps other
   versions *to* Forever numbering): Map, Light/LightData/LightParams, LiquidType, AreaTable,
@@ -54,9 +58,9 @@ Forever client before Phase 2 starts. `bun run compat -- [wowDir] [product]` run
 
 ## Re-running
 
-The check should be re-run when the client updates, and at Forever's launch (spec Q10 — the
-launch product code and folder name go in src/viewer/clientConfig.ts):
+The check should be re-run when the client updates (product codes and folder names live in
+src/viewer/clientConfig.ts):
 
 ```
-bun run compat -- "/Volumes/SANDISK SSD/World of Warcraft" wow_classic_beta
+bun run compat -- "/Volumes/SANDISK SSD/World of Warcraft" wowf
 ```
